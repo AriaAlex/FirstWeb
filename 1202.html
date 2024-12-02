@@ -40,7 +40,7 @@
         dir[event.key]=0;
         
     }
-    function walk() {
+    /*function walk() {
         if(dir["ArrowUp"]==1) {
             pos.y++;
         }
@@ -55,6 +55,20 @@
         }
         get("role").style.backgroundPositionX=bgpos.x+"px";
         get("role").style.backgroundPositionY=bgpos.y+"px";
+    } */
+    function bgmove() {
+        if(dir["ArrowUp"]==1) {
+            bgPY.y++;
+        }
+        else if(dir["ArrowDown"]==1) {
+            bgPY.y--;
+        }
+        else if(dir["ArrowLeft"]==1) {
+            bgPY.x++;
+        }
+        else if(dir["ArrowRight"]==1) {
+            bgPY.x--;
+        }
     }
     
     function gameInit() {
