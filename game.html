@@ -3,20 +3,71 @@
         <title>game</title>
         <meta charset="UTF-8">
         <style>
-        
+        input {
+            margin:5px 0;
+        }
+        #mytext {
+            font-size: 100pt;
+            color:black;
+        }
+        #rand_num{
+            font-size: 100pt;
+        }
             
         </style>
         <script>
+        function get(id) {
+            return document.getElementById(id);
+        }
         function getRandNum(min,max) {
             return Math.floor(Math.random()*(max-min+1))+min;
         }
-        function guessingnumber() {
+        function theanswer() {
             number=getRandNum(1,100)
+        }
+        function youranswer () {
+            yournumber=get(mytext)
+        }
+        function thegamestop () {
+
+        }
+        function bigger() {
+        <p>youranswer if bigger then Guessing number</p>
+        }
+        function smaller() {
+        <p>youranswer if smaller then Guessing number</p>
+        }
+        function checknumber() {
+        if (get("yournumber").checknumber) {
+            if (get("user_text").value.length>0){
+                get("mytext").innerHTML=get("user_text").value;
+            }else{
+                alert("please guess number!");
+                get("yournumber").checked=false;
+            }if (get("yournumber").checknumber) {
+            if (get("user_text").value.length>3){
+                alert("please guess your number 1-100!");
+                get("yournumber").checked=false;
+            }}}}
+        function youranswervstheanswer () {
+            if(get("number")="yournumber")  {
+            getElementById="thegamestop"
+            } 
+            else if(get("number")<"yournumber") { 
+            getElementById="bigger"
+            }
+            else if (ger("number")>"yournumber") {
+            getElementById="smaller"
+            }
         }
         </script>
     </head>
     <body>
         <h1>Number Guessing game</h1>
         <p>I am thinking about one number between 1 to 100</p>
+        <p>please only write number</p>
+        <input type="text" id="user_text"></id>
+        <input type="checkbox" id="yournumber" oninput="check();">ok<br>
+
     </body>
 </html>
