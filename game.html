@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <style>
         input {
-            margin:5px 0;
+            margin:5px 2px;
         }
         #mytext {
-            font-size: 100pt;
+            font-size: 20pt;
             color:black;
         }
         #rand_num{
@@ -23,19 +23,27 @@
             return Math.floor(Math.random()*(max-min+1))+min;
         }
         function theanswer() {
-            number=getRandNum(1,100)
+            number=getRandNum("rand_num").innerHTML=getRandNum(1,100);
         }
         function youranswer () {
             yournumber=get(mytext)
         }
         function thegamestop () {
-
+        if(theanswer==youranswer){
+        gameing=false
+        gameStop();
+        alert("you got it")
+        }
         }
         function bigger() {
-        <p>youranswer if bigger then Guessing number</p>
+        gameing=true
+        if (youranswer>theanswer){
+        alert("youranswer is bigger then guessingnumber")}
         }
         function smaller() {
-        <p>youranswer if smaller then Guessing number</p>
+        gameing=false
+        if (youranswer<theanswer){
+        alert("youranswer is smaller then guessingnumber")}
         }
         function checknumber() {
         if (get("yournumber").checknumber) {
@@ -44,20 +52,38 @@
             }else{
                 alert("please guess number!");
                 get("yournumber").checked=false;
+                gameing=false
             }if (get("yournumber").checknumber) {
             if (get("user_text").value.length>3){
                 alert("please guess your number 1-100!");
                 get("yournumber").checked=false;
+                gameing=false
             }}}}
         function youranswervstheanswer () {
             if(get("number")="yournumber")  {
             getElementById="thegamestop"
+            gameing=false
             } 
             else if(get("number")<"yournumber") { 
+            gameing=true
             getElementById="bigger"
             }
             else if (ger("number")>"yournumber") {
+            gameing=true
             getElementById="smaller"
+            }
+        }
+        function gamestart() {
+            gameing=true
+            gameTimer=setInterval(timeCountdown,100);
+        }
+        function gameStop() {
+            gameing=false
+            clearInterval(gameTimer);
+        }
+        function restartgame() {
+            if(alert("you got it")){
+            gameing=false
             }
         }
         </script>
@@ -66,8 +92,10 @@
         <h1>Number Guessing game</h1>
         <p>I am thinking about one number between 1 to 100</p>
         <p>please only write number</p>
-        <input type="text" id="user_text"></id>
-        <input type="checkbox" id="yournumber" oninput="check();">ok<br>
+        <input type="number" id="user_text">
+        <button onclick="theanswer">guess</button>
+        <button onclick="youranswer">check</button>
+        <button onclick="startGame()">Restart</button>
 
     </body>
 </html>
