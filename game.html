@@ -23,79 +23,88 @@
             return Math.floor(Math.random()*(max-min+1))+min;
         }
         function theanswer() {
-            number=getRandNum("rand_num").innerHTML=getRandNum(1,100);
+            number=getRandNum("rand_num");
+            number=innerHTML.getRandNum(1,100);
         }
         function youranswer () {
-            yournumber=get(mytext)
+            yournumber=get(mytext);
         }
         function thegamestop () {
-        if(theanswer==youranswer){
-        gameing=false
-        gameStop();
-        alert("you got it")
-        }
+            if(get("theanswer").value=get("youranswer").value){
+                gameing=false;
+                gameStop();
+                alert("you got it");
+            }
         }
         function bigger() {
-        gameing=true
-        if (youranswer>theanswer){
-        alert("youranswer is bigger then guessingnumber")}
+            gameing=true;
+            if (get("youranswer").value>get("theanswer").value){
+                alert("youranswer is bigger then guessingnumber");
+            }   
         }
         function smaller() {
-        gameing=false
-        if (youranswer<theanswer){
-        alert("youranswer is smaller then guessingnumber")}
+            gameing=false
+            if (get("youranswer").value<get("theanswer").value){
+                alert("youranswer is smaller then guessingnumber");
+            }
         }
         function checknumber() {
-        if (get("yournumber").checknumber) {
-            if (get("user_text").value.length>0){
-                get("mytext").innerHTML=get("user_text").value;
-            }else{
-                alert("please guess number!");
-                get("yournumber").checked=false;
-                gameing=false
-            }if (get("yournumber").checknumber) {
-            if (get("user_text").value.length>3){
-                alert("please guess your number 1-100!");
-                get("yournumber").checked=false;
-                gameing=false
-            }}}}
-        function youranswervstheanswer () {
-            if(get("number")="yournumber")  {
-            getElementById="thegamestop"
-            gameing=false
-            } 
-            else if(get("number")<"yournumber") { 
-            gameing=true
-            getElementById="bigger"
+            if (get("yournumber").value) {
+                if (get("user_text").value.length>0){
+                    get("mytext").innerHTML=get("user_text").value;
+                }else{
+                    alert("please guess number!");
+                    get("yournumber").checked=false;
+                    gameing=false;
+                }
+                if (get("yournumber").value) {
+                    if (get("user_text").value.length>3){
+                        alert("please guess your number 1-100!");
+                        get("yournumber").checked=false;
+                        gameing=false;
+                    }
+                }
             }
-            else if (ger("number")>"yournumber") {
-            gameing=true
-            getElementById="smaller"
+        }
+        function youranswervstheanswer () {
+            if(get("number").value==get("yournumber").value) {
+                getElementById="thegamestop";
+                gameing=false;
+            } else if(get("number").value<get("yournumber").value) { 
+                gameing=true;
+                getElementById="bigger";
+            } else if (get("number").value>get("yournumber").value) {
+                gameing=true;
+                getElementById="smaller";
             }
         }
         function gamestart() {
-            gameing=true
-            gameTimer=setInterval(timeCountdown,100);
+            theanswer =Math.floor(Math.random() * 100) + 1;
+            guessingremaining=7;
+            gameing=true;
+            gameTimer=setInterval(timeCountdown,1000);
+            get("guess").style.backgroundColor = 'white';
+            get("rand_num").innerHTML = "?"; // Hide
         }
         function gameStop() {
-            gameing=false
+            gameing=false;
             clearInterval(gameTimer);
         }
         function restartgame() {
-            if(alert("you got it")){
-            gameing=false
+            if(get("number").value==get("yournumber").value){    
+            gameing=false;
             }
+            clear("user_text");
         }
         </script>
     </head>
     <body>
         <h1>Number Guessing game</h1>
         <p>I am thinking about one number between 1 to 100</p>
-        <p>please only write number</p>
         <input type="number" id="user_text">
-        <button onclick="theanswer">guess</button>
-        <button onclick="youranswer">check</button>
-        <button onclick="startGame()">Restart</button>
+        <button onclick="youranswervstheanswer()">guess</button>
+        <button onclick="checknumber()">check</button>
+        <button onclick="gamestart()">Restart</button>
 
     </body>
 </html>

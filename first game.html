@@ -1,25 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Number Guessing Game</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+    <title>Number Guessing Game</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+        input {
+            margin: 5px 2px;
+        }
+        #message {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #rand_num {
+            font-size: 100pt;
+        }
+        .red { background-color: red;}
+        .green { background-color: green;}
+
+    </style>
 </head>
-<body>
-  <h1>Number Guessing Game</h1>
-  <p>I'm thinking of a number between 1 and 100.</p>
-  <input type="number" id="guess" min="1" max="100">
-  <button onclick="checkGuess()">Guess</button>
-  <p id="message"></p>
-  <script src="script.js"></script>
-  <body>{
-    font-family: sans-serif;
-    text-align: center;
-  }
-  
-  #message {
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  </body>
+<body onload="startGame()">
+    <div id="rand_num">?</div>
+    <h1>Number Guessing game</h1>
+    <p>I am thinking about one number between 1 to 100</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button onclick="checkGuess()">Guess</button>
+    <p id="message"></p>
+    <button onclick="startGame()">Restart</button>
+
+    <script>
+        let secretNumber;
+        let guessesRemaining = 7;
+
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            guessesRemaining = 7;
+            get("message").innerHTML = "";
+            get("guess").disabled = false;
+            get("guess").style.backgroundColor = 'white';
+            get("guess").value = ''; // Clear the input field
+            get("rand_num").innerHTML = "?";
+        }
+
+        function checkGuess() {
+            const guess = parseInt(get("guess").value);
+            const message = get("message");
+            const guessInput = get("guess");
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                message.innerHTML = "Please enter a valid number between 1 and 100.";
+                return;
+            }
+
+            guessesRemaining--;
+
+            if (guess === secretNumber) {
+                message.innerHTML = "You got it! The number was " + secretNumber;
+                get("rand_num").innerHTML = secretNumber;
+                guessInput.disabled = true;
+                guessInput.classList.add('green');
+            } else if (guessesRemaining === 0) {
+                message.innerHTML = "You ran out of guesses! The number was " + secretNumber;
+                get("rand_num").innerHTML = secretNumber;
+                guessInput.disabled = true;
+                guessInput.classList.add('red');
+            } else if (guess < secretNumber) {
+                message.innerHTML = "Too low!  Guesses left: " + guessesRemaining;
+            } else {
+                message.innerHTML = "Too high! Guesses left: " + guessesRemaining;
+            }
+        }
+
+
+        function get(id) {
+            return document.getElementById(id);
+        }
+    </script>
 </body>
 </html>
