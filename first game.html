@@ -1,84 +1,99 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Number Guessing Game</title>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-        }
+    <head>
+        <title>game</title>
+        <meta charset="UTF-8">
+        <style>
         input {
             margin: 5px 2px;
         }
-        #message {
-            font-weight: bold;
-            margin-top: 10px;
+        #mytext {
+            font-size: 20pt;
+            color: black;
         }
         #rand_num {
             font-size: 100pt;
         }
-        .red { background-color: red;}
-        .green { background-color: green;}
-
-    </style>
-</head>
-<body onload="startGame()">
-    <div id="rand_num">?</div>
-    <h1>Number Guessing game</h1>
-    <p>I am thinking about one number between 1 to 100</p>
-    <input type="number" id="guess" min="1" max="100">
-    <button onclick="checkGuess()">Guess</button>
-    <p id="message"></p>
-    <button onclick="startGame()">Restart</button>
-
-    <script>
-        let secretNumber;
-        let guessesRemaining = 7;
-
-        function startGame() {
-            secretNumber = Math.floor(Math.random() * 100) + 1;
-            guessesRemaining = 7;
-            get("message").innerHTML = "";
-            get("guess").disabled = false;
-            get("guess").style.backgroundColor = 'white';
-            get("guess").value = ''; // Clear the input field
-            get("rand_num").innerHTML = "?";
-        }
-
-        function checkGuess() {
-            const guess = parseInt(get("guess").value);
-            const message = get("message");
-            const guessInput = get("guess");
-
-            if (isNaN(guess) || guess < 1 || guess > 100) {
-                message.innerHTML = "Please enter a valid number between 1 and 100.";
-                return;
-            }
-
-            guessesRemaining--;
-
-            if (guess === secretNumber) {
-                message.innerHTML = "You got it! The number was " + secretNumber;
-                get("rand_num").innerHTML = secretNumber;
-                guessInput.disabled = true;
-                guessInput.classList.add('green');
-            } else if (guessesRemaining === 0) {
-                message.innerHTML = "You ran out of guesses! The number was " + secretNumber;
-                get("rand_num").innerHTML = secretNumber;
-                guessInput.disabled = true;
-                guessInput.classList.add('red');
-            } else if (guess < secretNumber) {
-                message.innerHTML = "Too low!  Guesses left: " + guessesRemaining;
-            } else {
-                message.innerHTML = "Too high! Guesses left: " + guessesRemaining;
-            }
-        }
-
+        </style>
+        <script>
+        var theAnswer; 
+        var gameing = false;
 
         function get(id) {
             return document.getElementById(id);
         }
-    </script>
-</body>
+
+        function getRandNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function theanswer() {
+            theAnswer = getRandNum(1, 100);
+            get("rand_num").innerHTML = "?"; // Hide the number initially
+        }
+
+        function youranswer() {
+            return parseInt(get("user_text").value, 10);
+        }
+
+        function thegamestop() {
+            if (theAnswer === youranswer()) {
+                gameing = false;
+                alert("You got it!");
+            }
+        }
+
+        function bigger() {
+            if (gameing && youranswer() > theAnswer) {
+                alert("Your guess is bigger than the number.");
+            }
+        }
+
+        function smaller() {
+            if (gameing && youranswer() < theAnswer) {
+                alert("Your guess is smaller than the number.");
+            }
+        }
+
+        function checknumber() {
+            if (gameing) {
+                if (!get("user_text").value) {
+                    alert("Please guess a number!");
+                } else {
+                    thegamestop();
+                    bigger();
+                    smaller();
+                }
+            }
+        }
+
+        function gamestart() {
+            theanswer(); // Generate a random number
+            guessingRemaining = 7;
+            gameing = true;
+            gameTimer = setInterval(timeCountdown, 1000);
+            get("rand_num").innerHTML = "?"; // Hide the number
+        }
+
+
+        function gameStop() {
+            gameing = false;
+            clearInterval(gameTimer);
+        }
+
+        function restartgame() {
+            get("user_text").value = "";
+            gameStop();
+            gamestart();
+        }
+        </script>
+    </head>
+    <body>
+        <h1>Number Guessing Game</h1>
+        <p>I am thinking about one number between 1 and 100</p>
+        <input type="number" id="user_text" min="1" max="100">
+        <button onclick="checknumber()">Guess</button>
+        <button onclick="gamestart()">Start</button>
+        <button onclick="restartgame()">Restart</button>
+        <p>The number is: <span id="rand_num">?</span></p>
+    </body>
 </html>
