@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Remainder Theorem</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .highlight {
+            background-color: #f0f0f0; /* Light gray background for highlight */
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chinese Remainder Theorem</h1>
+
+        <p>The Chinese Remainder Theorem is a number theory result that states that if you know the remainders of the division of an integer by several pairwise coprime integers, then you can determine the remainder of the division of that integer by the product of these integers.</p>
+
+
+        <div class="highlight">
+        <h2>Example:</h2>
+        <p>Suppose we have the following system of congruences:</p>
+        <ul>
+            <li>x ≡ 2 (mod 3)</li>
+            <li>x ≡ 3 (mod 5)</li>
+            <li>x ≡ 2 (mod 7)</li>
+        </ul>
+        <p>What is x?</p>
+
+        <p>The answer according to CRT: The solution is x = 23</p>
+         <p>Because</p>
+        <ul>
+        <li>23/3 has a remainder of 2</li>
+        <li>23/5 has a remainder of 3</li>
+        <li>23/7 has a remainder of 2</li>
+        </ul>
+
+        </div>
+
+        <h2>How to Calculate?</h2>
+
+        <p>The calculation involves several steps, including finding modular inverses and using the formula for the solution. Here are some tools and resources to help:</p>
+
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem" target="_blank">Wikipedia - Chinese Remainder Theorem</a></li>
+            <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/modular-arithmetic/a/the-chinese-remainder-theorem" target="_blank">Khan Academy - Chinese Remainder Theorem</a></li>
+            <li>Search for "Chinese Remainder Theorem Calculator" to find online tools that can solve these problems for you.</li>
+        </ul>
+    </div>
+</body>
+</html>
